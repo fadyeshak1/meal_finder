@@ -70,6 +70,7 @@ ul li {
 .nav-btn:active {
   transform: translateY(0);
   box-shadow: 0 2px 4px rgba(255, 110, 0, 0.3);
+
 }
 
 main {
