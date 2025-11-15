@@ -46,4 +46,118 @@ nav {
 ul li {
   display: inline;
   margin-left: 40px;
+  font-family: sans-serif;
+}
+
+/* Navigation Button Styles */
+.nav-btn {
+  cursor: pointer;
+  padding: 10px 20px;
+  border: 2px solid #ff6e00;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  color: #ff6e00;
+  font-weight: 500;
+}
+
+.nav-btn:hover {
+  background-color: #ff6e00;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 110, 0, 0.3);
+}
+
+.nav-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(255, 110, 0, 0.3);
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 60%;
+  padding: 3rem;
+  box-shadow: 10px 10px 40px 5px #e0e0e0;
+  margin-top: 5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content-container h1 {
+  font-family: sans-serif;
+  font-size: 2rem;
+  color: #2c2c2c;
+}
+
+.content-container p {
+  font-family: sans-serif;
+  line-height: 1.4;
+  margin-bottom: 2rem;
+  color: #444444;
+  width: 26rem;
+}
+
+.img {
+  transform: translateX(-120px);
+  margin-top: 1rem;
+  width: 350px;
+  height: 350px;
+  border-radius: 300px;
+  background: url("https://images.unsplash.com/photo-1600289031464-74d374b64991?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1075&q=80");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: conver;
+}
+
+.ingredients {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 5rem;
+  padding: 50px;
+}
+
+.ingredients span {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+.ing {
+  padding: 10px 20px;
+  border: 2px solid #ff6e00;
+  color: #ff6e00;
+  font-family: sans-serif;
+  border-radius: 100px;
+}
+
+/* Main Button Styles */
+.main-btn {
+  background: transparent;
+  border: 2px solid #ffa31a;
+  padding: 12px 24px;
+  color: #ffa31a;
+  font-family: sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(255, 163, 26, 0.2);
+}
+
+.main-btn:hover {
+  background-color: #ffa31a;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(255, 163, 26, 0.4);
+}
+
+.main-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(255, 163, 26, 0.3);
 }
