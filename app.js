@@ -1,0 +1,145 @@
+const searchMeal = async (e) => {
+  e.preventDefault();
+
+  // Select Elements
+  const input = document.querySelector(".input");
+  const title = document.querySelector(".title");
+  const info = document.querySelector(".info");
+  const img = document.querySelector(".img");
+  const ingredientsOutput = document.querySelector(".ingredients");
+
+  const showMealInfo = (meal) => {
+    const { strMeal, strMealThumb, strInstructions } = meal;
+    title.textContent = strMeal;
+    img.style.backgroundImage = `url(${strMealThumb})`;
+    info.textContent = strInstructions;
+
+    const ingredients = [];
+
+    for (let i = 1; i <= 20; i++) {
+      if (meal[`strIngredient${i}`]) {
+        ingredients.push(
+          `${meal[`strIngredient${i}`]} - ${meal[`strMeasure${i}`]}`
+        );
+      } else {
+        break;
+      }
+    }
+
+    const html = `
+    <span>${ingredients
+      .map((ing) => `<li class="ing">${ing}</li>`)
+      .join("")}</span>
+    `;
+
+    ingredientsOutput.innerHTML = html;
+  };
+
+  const showAlert = () => {
+    alert("Meal not found :(");
+  };
+
+  // Fetch Data
+  const fetchMealData = async (val) => {
+    const res = await fetch(
+      `https://www.themealdb.com/api/json/v1/1/search.php?s=${val}`
+    );
+
+    const { meals } = await res.json();
+    return meals;
+  };
+
+  // Get the user value
+  const val = input.value.trim();
+
+  if (val) {
+    const meals = await fetchMealData(val);
+
+    if (!meals) {
+      showAlert();
+      return;
+    }
+
+    meals.forEach(showMealInfo);
+  } else {
+    alert("Please try searching for meal :)");
+  }
+};
+
+// Form and magnifier event listeners
+const form = document.querySelector("form");
+form.addEventListener("submit", searchMeal);
+
+const magnifier = document.querySelector(".magnifier");
+magnifier.addEventListener("click", searchMeal);
+
+// Navigation buttons functionality
+const navButtons = document.querySelectorAll(".nav-btn");
+
+navButtons.forEach((btn) => {
+  btn.addEventListener("click", async () => {
+    const category = btn.getAttribute("data-category");
+    const input = document.querySelector(".input");
+    
+    // Set the input value to the category
+    input.value = category;
+    
+    // Trigger the search with the category
+    const title = document.querySelector(".title");
+    const info = document.querySelector(".info");
+    const img = document.querySelector(".img");
+    const ingredientsOutput = document.querySelector(".ingredients");
+
+    try {
+      const res = await fetch(
+        `https://www.themealdb.com/api/json/v1/1/search.php?s=${category}`
+      );
+      const { meals } = await res.json();
+
+      if (meals && meals.length > 0) {
+        const meal = meals[0];
+        const { strMeal, strMealThumb, strInstructions } = meal;
+        
+        title.textContent = strMeal;
+        img.style.backgroundImage = `url(${strMealThumb})`;
+        info.textContent = strInstructions;
+
+        const ingredients = [];
+        for (let i = 1; i <= 20; i++) {
+          if (meal[`strIngredient${i}`]) {
+            ingredients.push(
+              `${meal[`strIngredient${i}`]} - ${meal[`strMeasure${i}`]}`
+            );
+          } else {
+            break;
+          }
+        }
+
+        const html = `
+        <span>${ingredients
+          .map((ing) => `<li class="ing">${ing}</li>`)
+          .join("")}</span>
+        `;
+
+        ingredientsOutput.innerHTML = html;
+      } else {
+        alert(`No ${category} meals found. Try searching manually!`);
+      }
+    } catch (error) {
+      alert("Error fetching meal data. Please try again.");
+    }
+  });
+});
+
+// Main order button functionality
+const mainBtn = document.querySelector(".main-btn");
+
+mainBtn.addEventListener("click", () => {
+  const mealName = document.querySelector(".title").textContent;
+  
+  if (mealName && mealName !== "Food Name") {
+    alert(`🎉 Order placed for: ${mealName}\n\nThank you for your order!`);
+  } else {
+    alert("Please search for a meal first before ordering!");
+  }
+});
